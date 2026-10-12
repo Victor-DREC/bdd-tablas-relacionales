@@ -49,3 +49,16 @@ VALUES
 (5, 'Juan Rulfo', 'México');
 
 select * from autores;
+
+INSERT INTO libro_autor(la_libro_codigo_fk, la_autor_id_fk, anio_publicacion)
+VALUES
+('LIB01', 1, 1967),
+('LIB02', 2, 1605),
+('LIB03', 3, 1943),
+('LIB04', 1, 1981),
+('LIB05', 4, 1949),
+('LIB06', 4, 1953),
+('LIB07', 1, 1985),
+('LIB08', 5, 1955);
+
+select * from libro_autor;
