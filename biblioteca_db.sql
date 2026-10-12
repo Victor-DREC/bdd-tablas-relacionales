@@ -59,6 +59,41 @@ VALUES
 ('LIB05', 4, 1949),
 ('LIB06', 4, 1953),
 ('LIB07', 1, 1985),
-('LIB08', 5, 1955);
+('LIB08', 5, 1955),
+('LIB09', 2, 2022),
+('LIB10', 5, 2025);
 
 select * from libro_autor;
+
+--se muestra TITULO, AUTOR, PAIS, AÑO PUBLICADO
+SELECT l.titulo, a.nombre, a.pais, la.anio_publicacion
+from libro_autor la 
+inner join libros l 
+on la.la_libro_codigo_fk = l.codigo
+inner join autores a
+on la.la_autor_id_fk = a.id;
+
+--se muestran los libros publicados despues del 2020
+SELECT l.titulo, a.nombre, la.anio_publicacion
+from libro_autor la 
+inner join libros l 
+on la.la_libro_codigo_fk = l.codigo
+inner join autores a
+on la.la_autor_id_fk = a.id WHERE la.anio_publicacion > 2020;
+
+--se muestra los autores de un solo pais
+SELECT a.nombre, a.pais from autores a WHERE a.pais = 'Francia';
+
+--se muestran los libros de forma descendente en respecto al año de publicacion
+SELECT l.titulo, l.paginas, la.anio_publicacion
+FROM libros l inner join libro_autor la
+on l.codigo = la.la_libro_codigo_fk ORDER BY la.anio_publicacion desc;
+
+--contabiliza el numero de libros de cada autor
+SELECT 
+    a.nombre, a.pais,
+    COUNT(la.la_libro_codigo_fk) AS total_libros
+FROM autores a
+INNER JOIN libro_autor la ON a.id = la.la_autor_id_fk
+GROUP BY a.id, a.nombre, a.pais
+ORDER BY total_libros DESC;
